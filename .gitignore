@@ -205,3 +205,30 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+# Datasets grandes
+*.deb
+*.tgz
+*.zip
+*.csv
+*.parquet
+*.json
+data/
+
+# Spark
+spark-*.tgz
+spark-*/
+
+# VS Code remoto
+.vscode/
+.vscode-server/
+
+# Logs
+*.log
+logs/
+
+*.html
+*_files/
+
+
