@@ -228,7 +228,6 @@ spark-*/
 *.log
 logs/
 
-*.html
 *_files/
 
 
