@@ -1,10 +1,343 @@
 ---
 title: "Test Quarto Julio Vargas"
-author: "Julio Vargas"
+author:
+  - name: Julio Vargas Garcia
+    affiliations:
+      - id: bu
+        name: Boston University
+        city: Boston
+        state: MA
+number-sections: true
+date: '2025-09-17'
 format:
   html:
-    theme: cosmo
+    theme: cerulean
     toc: true
+    toc-depth: 2
     code-overflow: wrap
   docx: default
+  pdf: default
+date-modified: today
+date-format: long
+execute:
+  echo: true
+  eval: true
+  freeze: auto
+  jupyter: python3
 ---
+
+
+# import data
+
+Importing Dataset using Pyspark. The code shows the schema and first rows of the dataset.
+Schema is shown below but partial dataframe is muted.
+
+```{python}
+from pyspark.sql import SparkSession
+from pyspark.sql.types import StructType
+import json
+
+spark = SparkSession.builder.appName("JobPostingsAnalysis").getOrCreate()
+
+# Load schema from JSON file
+with open("data/schema_lightcast.json") as f:
+    schema = StructType.fromJson(json.load(f))
+
+df = (spark.read
+      .option("header", "true")
+      .option("inferSchema","false")   
+      .schema(schema)              # saved schema
+      .option("multiLine", "true")
+      .option("escape", "\"")
+      .csv("data/lightcast_job_postings.csv")
+      .limit(5000))
+
+df.createOrReplaceTempView("jobs")
+
+
+# save schema to pretty JSON
+import json
+# convert schema to dict first
+schema_dict = df.schema.jsonValue()
+# write it nicely formatted (indent=2 gives pretty print)
+with open("data/schema_lightcast.json", "w") as f:
+    json.dump(schema_dict, f, indent=2)
+
+
+df.printSchema()
+
+
+# Count total rows in the DataFrame
+row_count = df.count()
+print(row_count)
+
+```
+
+
+# Step 2 - Creating Relational Tables
+
+We will split the main dataframe into four relational tables based on the dataset:
+
+- Job Postings
+- Industries (based on NAICS 2022 and SOC 5)
+- Companies
+- Location (including MSA - Metropolitan Statistical Area)
+
+Each table should have a primary key and the necessary foreign keys to maintain relationships. Here’s a table outlining the four relational tables, along with their relevant columns:
+
+## Example
+
+Let’s get 5 rows of id, title, and company_name from the job postings table.
+
+```{python}
+spark.sql("SELECT ID AS job_id, title_raw FROM jobs LIMIT 5").show(truncate=False)
+```
+<!-- **********************************************************-->
+## Locations Table
+
+Lets extract columns from the main dataframe to create a locations table. The columns are as follows:
+
+I also sorted the locations table by MSA in ascending order and then added a location_id as primary key.
+
+`LOCATION_ID (PK)`, `LOCATION`, `CITY_NAME`, `STATE_NAME`, `COUNTY_NAME`, `MSA`, `MSA_NAME`.
+
+```{python}
+from pyspark.sql.functions import col, monotonically_increasing_id
+
+# using inbuilt pyspark select
+# locations_df = df.select(
+#     col("location"),
+#     col("city_name"),
+#     col("state_name"),
+#     col("county_name"),
+#     col("msa"),
+#     col("msa_name")
+# ).distinct().withColumn("location_id", monotonically_increasing_id())
+
+#alternative using selectExpr
+locations_df = df.selectExpr("monotonically_increasing_id() AS LOCATION_ID",
+                             "location",
+                             "city_name",
+                             "state_name",
+                             "county_name",
+                             "msa",
+                             "msa_name")
+
+locations_df.createOrReplaceTempView("locations")
+
+locations_df.show(truncate=False)
+
+```
+
+## Industries Table
+
+industries  INDUSTRY_ID (Primary Key), NAICS_2022_6, NAICS_2022_6_NAME, SOC_5, SOC_5_NAME, LOT_SPECIALIZED_OCCUPATION_NAME, LOT_OCCUPATION_GROUP
+
+```{python}
+industries_df = df.selectExpr("monotonically_increasing_id() AS INDUSTRY_ID",
+                              "naics_2022_4",
+                              "naics_2022_4_name",
+                              "naics_2022_5",
+                              "naics_2022_5_name",
+                              "naics_2022_6",
+                              "naics_2022_6_name",
+                              "soc_5 AS SOC_5",
+                              "soc_5_name AS SOC_5_NAME",
+                              "lot_specialized_occupation_name",
+                              "lot_occupation_group")
+
+industries_df.createOrReplaceTempView("industries")
+
+industries_df.show(truncate=False)
+
+```
+
+## Companies Table
+
+```{python}
+#| eval: true
+# 
+# Step 1: Create Companies Table (Primary Key: company_id)
+companies_df = df.select(
+    col("company"),
+    col("company_name"),
+    col("company_raw"),
+    col("company_is_staffing")
+).distinct().withColumn("company_id", monotonically_increasing_id())
+# companies_df.show(5)
+companies = companies_df.toPandas()
+companies.drop(columns=["company"], inplace=True)
+companies.rename(columns={"company_is_staffing": "is_staffing"},
+inplace=True)
+companies.to_csv("./output/companies.csv", index=False)
+companies.head()
+
+```
+
+## Job postings Table 
+
+```{python}
+#| eval: true
+
+# Step 4: Create Job Postings Table (Adding Foreign Keys)
+job_postings_df = df.select(
+    col("id").alias("job_id"),
+    col("title_clean"),
+    col("body"),
+    col("company"),
+    col("employment_type_name"),
+    col("remote_type_name"),
+    col("min_years_experience"),
+    col("max_years_experience"),
+    col("salary"),
+    col("salary_from"),
+    col("salary_to"),
+    col("location"),
+    col("naics_2022_6"),
+    col("posted"),
+    col("expired"),
+    col("duration")
+)
+
+job_postings_df.show(5)
+
+```
+
+Adding Foreign keys  to job  postings table
+
+```{python}
+#| eval: true
+
+# Join with Companies Table to get company_id
+job_postings_df = job_postings_df.join(companies_df.select("company", "company_id"), on="company", how="left")
+
+# Join with Locations Table to get location_id
+job_postings_df = job_postings_df.join(locations_df.select("location", "location_id"), job_postings_df.location == locations_df["location"],
+how="left").drop("location")
+
+# Join with Industries Table to get industry_id
+job_postings_df = job_postings_df.join(industries_df.select("naics_2022_6", "industry_id"),
+ job_postings_df.naics_2022_6 == industries_df.naics_2022_6,
+ how="left").drop("naics_2022_6")
+
+# Drop redundant columns
+job_postings_df = job_postings_df.drop("company", "lat-long")
+job_postings_df.createOrReplaceTempView("job_postings")
+
+# Show final job_postings_df structure
+job_postings_df.show(5)
+
+```
+<!-- **********************************************************-->
+
+# Query 1: Industry-Specific Salary Trends Grouped by Job Title
+
+Identify **median salary trends** for job postings in the **Technology industry (`NAICS_2022_5 = '51821'`)**, grouped by **specialized occupation**.
+
+- **Filter the dataset**
+  - Select job postings where **`naics_2022_5 = '51821'`** (Technology industry).
+  - Ensure salary values are **not NULL and greater than 0**.
+- **Join the relevant tables**
+  - Use **`job_postings`** as the base table.
+  - Join with **`industries`** using **`industry_id`**.
+- **Aggregate data**
+  - Group results by **industry name (`naics_2022_5_name`)** and **specialized occupation (`specialized_occupation`)**.
+  - Compute the **median salary** using **`PERCENTILE_APPROX()`** for specialized occupation.
+- **Order the results**
+  - Sort by **median salary** in descending order.
+- **Visualize results** using **Plotly**
+  - Create a **grouped bar chart** where:
+    - **X-axis** = `lot_specialized_occupation_name`
+    - **Y-axis** = `median_salary`
+    - **Color** = `industry_name`
+
+- Ensure different specialized occupations are distinguishable across the industry.
+
+::: {.callout-note}
+# Query compute median salary by specialized occupation in Tech  in progress
+```{python eval=false}
+from pyspark.sql import functions as F
+
+# Filter for Tech industry
+tech = (
+    df.where(
+        (F.col("NAICS_2022_5") == "51821") &
+        F.col("SALARY").isNotNull() &
+        (F.col("SALARY") > 0)
+    )
+    .withColumn("salary_d", F.col("SALARY").cast("double"))
+    .groupBy(
+        F.col("NAICS_2022_5_NAME"),
+        F.col("LOT_SPECIALIZED_OCCUPATION_NAME")   # ← aquí nombre real
+    )
+    .agg(F.expr("percentile_approx(salary_d, 0.5)").alias("median_salary"))
+    .orderBy(F.desc("median_salary"))
+)
+
+tech.show(truncate=False)
+
+
+```
+<!-- **********************************************************-->
+
+# PLOT
+
+```{python}
+import pandas as pd
+import plotly.express as px
+import plotly.io as pio
+
+#pio.renderers.default = "plotly_mimetype"
+pdf = tech.toPandas()
+
+pdf = pdf.sort_values("median_salary", ascending=True)
+
+fig = px.bar(
+    pdf,
+    x="LOT_SPECIALIZED_OCCUPATION_NAME",  
+    y="median_salary",                   
+    title="Median Salary by Specialized Occupation"
+)
+
+fig
+
+
+
+```
+
+
+
+
+<!-- **********************************************************-->
+
+```{python}
+from pyspark.sql import functions as F
+import plotly.express as px
+
+# Filtrar y agrupar
+tech2 = (df
+    .where( (F.col("NAICS_2022_6") == F.lit("518210")) &
+            F.col("SALARY").isNotNull() &
+            (F.col("SALARY") > 0) )
+    .groupBy(
+        F.coalesce(F.col("NAICS_2022_6_NAME"), F.lit("NAICS 518210")).alias("industry_name"),
+        F.col("LOT_SPECIALIZED_OCCUPATION_NAME")
+    )
+    .agg(F.expr("percentile_approx(SALARY, 0.5)").alias("median_salary"))
+    .orderBy(F.desc("median_salary"))
+)
+
+```
+<!-- **********************************************************-->
+```{python}
+import matplotlib.pyplot as plt
+#from pyspark.sql.functions import col
+
+df_pandas = df.select("SALARY").toPandas()
+plt.hist(df_pandas['SALARY'].dropna(), bins=30)
+plt.title("Distribución de salarios")
+plt.xlabel("Salario")
+plt.ylabel("Frecuencia")
+plt.show()
+
+```

@@ -6,7 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Julio Vargas">
+<meta name="author" content="Julio Vargas Garcia">
+<meta name="dcterms.date" content="2025-09-17">
 
 <title>Test Quarto Julio Vargas</title>
 <style>
@@ -21,10 +22,45 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="juliovargas_files/libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="juliovargas_files/libs/clipboard/clipboard.min.js"></script>
 <script src="juliovargas_files/libs/quarto-html/quarto.js" type="module"></script>
 <script src="juliovargas_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="juliovargas_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -35,7 +71,10 @@ ul.task-list li input[type="checkbox"] {
 <link href="juliovargas_files/libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="juliovargas_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="juliovargas_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="juliovargas_files/libs/bootstrap/bootstrap-7e6390f8006c355a61dc43d1ad16b131.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="juliovargas_files/libs/bootstrap/bootstrap-7a21f6d4abaff90cf9cc4e7f165caa1b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -44,8 +83,23 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="juliovargas.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></div>
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#import-data" id="toc-import-data" class="nav-link active" data-scroll-target="#import-data"><span class="header-section-number">1</span> import data</a></li>
+  <li><a href="#step-2---creating-relational-tables" id="toc-step-2---creating-relational-tables" class="nav-link" data-scroll-target="#step-2---creating-relational-tables"><span class="header-section-number">2</span> Step 2 - Creating Relational Tables</a>
+  <ul class="collapse">
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">2.1</span> Example</a></li>
+  <li><a href="#locations-table" id="toc-locations-table" class="nav-link" data-scroll-target="#locations-table"><span class="header-section-number">2.2</span> Locations Table</a></li>
+  <li><a href="#industries-table" id="toc-industries-table" class="nav-link" data-scroll-target="#industries-table"><span class="header-section-number">2.3</span> Industries Table</a></li>
+  <li><a href="#companies-table" id="toc-companies-table" class="nav-link" data-scroll-target="#companies-table"><span class="header-section-number">2.4</span> Companies Table</a></li>
+  <li><a href="#job-postings-table" id="toc-job-postings-table" class="nav-link" data-scroll-target="#job-postings-table"><span class="header-section-number">2.5</span> Job postings Table</a></li>
+  </ul></li>
+  <li><a href="#query-1-industry-specific-salary-trends-grouped-by-job-title" id="toc-query-1-industry-specific-salary-trends-grouped-by-job-title" class="nav-link" data-scroll-target="#query-1-industry-specific-salary-trends-grouped-by-job-title"><span class="header-section-number">3</span> Query 1: Industry-Specific Salary Trends Grouped by Job Title</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="juliovargas.docx"><i class="bi bi-file-word"></i>MS Word</a></li><li><a href="juliovargas.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -54,17 +108,36 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Julio Vargas Garcia </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Boston University
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
+      
     <div>
-    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-             <p>Julio Vargas </p>
-          </div>
+      <p class="date">September 17, 2025</p>
+    </div>
   </div>
-    
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">September 21, 2025</p>
+    </div>
+  </div>
     
   </div>
   
@@ -73,7 +146,620 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="import-data" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> import data</h1>
+<p>Importing Dataset using Pyspark. The code shows the schema and first rows of the dataset. Schema is shown below but partial dataframe is muted.</p>
+<div id="c2a6a198" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.types <span class="im">import</span> StructType</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>spark <span class="op">=</span> SparkSession.builder.appName(<span class="st">"JobPostingsAnalysis"</span>).getOrCreate()</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load schema from JSON file</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"data/schema_lightcast.json"</span>) <span class="im">as</span> f:</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    schema <span class="op">=</span> StructType.fromJson(json.load(f))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> (spark.read</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>      .option(<span class="st">"header"</span>, <span class="st">"true"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>      .option(<span class="st">"inferSchema"</span>,<span class="st">"false"</span>)   </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      .schema(schema)              <span class="co"># saved schema</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      .option(<span class="st">"multiLine"</span>, <span class="st">"true"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>      .option(<span class="st">"escape"</span>, <span class="st">"</span><span class="ch">\"</span><span class="st">"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>      .csv(<span class="st">"data/lightcast_job_postings.csv"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>      .limit(<span class="dv">5000</span>))</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>df.createOrReplaceTempView(<span class="st">"jobs"</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># save schema to pretty JSON</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co"># convert schema to dict first</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>schema_dict <span class="op">=</span> df.schema.jsonValue()</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co"># write it nicely formatted (indent=2 gives pretty print)</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"data/schema_lightcast.json"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    json.dump(schema_dict, f, indent<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>df.printSchema()</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Count total rows in the DataFrame</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>row_count <span class="op">=</span> df.count()</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(row_count)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>root
+ |-- ID: string (nullable = true)
+ |-- LAST_UPDATED_DATE: string (nullable = true)
+ |-- LAST_UPDATED_TIMESTAMP: timestamp (nullable = true)
+ |-- DUPLICATES: integer (nullable = true)
+ |-- POSTED: string (nullable = true)
+ |-- EXPIRED: string (nullable = true)
+ |-- DURATION: integer (nullable = true)
+ |-- SOURCE_TYPES: string (nullable = true)
+ |-- SOURCES: string (nullable = true)
+ |-- URL: string (nullable = true)
+ |-- ACTIVE_URLS: string (nullable = true)
+ |-- ACTIVE_SOURCES_INFO: string (nullable = true)
+ |-- TITLE_RAW: string (nullable = true)
+ |-- BODY: string (nullable = true)
+ |-- MODELED_EXPIRED: string (nullable = true)
+ |-- MODELED_DURATION: integer (nullable = true)
+ |-- COMPANY: integer (nullable = true)
+ |-- COMPANY_NAME: string (nullable = true)
+ |-- COMPANY_RAW: string (nullable = true)
+ |-- COMPANY_IS_STAFFING: boolean (nullable = true)
+ |-- EDUCATION_LEVELS: string (nullable = true)
+ |-- EDUCATION_LEVELS_NAME: string (nullable = true)
+ |-- MIN_EDULEVELS: integer (nullable = true)
+ |-- MIN_EDULEVELS_NAME: string (nullable = true)
+ |-- MAX_EDULEVELS: integer (nullable = true)
+ |-- MAX_EDULEVELS_NAME: string (nullable = true)
+ |-- EMPLOYMENT_TYPE: integer (nullable = true)
+ |-- EMPLOYMENT_TYPE_NAME: string (nullable = true)
+ |-- MIN_YEARS_EXPERIENCE: integer (nullable = true)
+ |-- MAX_YEARS_EXPERIENCE: integer (nullable = true)
+ |-- IS_INTERNSHIP: boolean (nullable = true)
+ |-- SALARY: integer (nullable = true)
+ |-- REMOTE_TYPE: integer (nullable = true)
+ |-- REMOTE_TYPE_NAME: string (nullable = true)
+ |-- ORIGINAL_PAY_PERIOD: string (nullable = true)
+ |-- SALARY_TO: integer (nullable = true)
+ |-- SALARY_FROM: integer (nullable = true)
+ |-- LOCATION: string (nullable = true)
+ |-- CITY: string (nullable = true)
+ |-- CITY_NAME: string (nullable = true)
+ |-- COUNTY: integer (nullable = true)
+ |-- COUNTY_NAME: string (nullable = true)
+ |-- MSA: integer (nullable = true)
+ |-- MSA_NAME: string (nullable = true)
+ |-- STATE: integer (nullable = true)
+ |-- STATE_NAME: string (nullable = true)
+ |-- COUNTY_OUTGOING: integer (nullable = true)
+ |-- COUNTY_NAME_OUTGOING: string (nullable = true)
+ |-- COUNTY_INCOMING: integer (nullable = true)
+ |-- COUNTY_NAME_INCOMING: string (nullable = true)
+ |-- MSA_OUTGOING: integer (nullable = true)
+ |-- MSA_NAME_OUTGOING: string (nullable = true)
+ |-- MSA_INCOMING: integer (nullable = true)
+ |-- MSA_NAME_INCOMING: string (nullable = true)
+ |-- NAICS2: integer (nullable = true)
+ |-- NAICS2_NAME: string (nullable = true)
+ |-- NAICS3: integer (nullable = true)
+ |-- NAICS3_NAME: string (nullable = true)
+ |-- NAICS4: integer (nullable = true)
+ |-- NAICS4_NAME: string (nullable = true)
+ |-- NAICS5: integer (nullable = true)
+ |-- NAICS5_NAME: string (nullable = true)
+ |-- NAICS6: integer (nullable = true)
+ |-- NAICS6_NAME: string (nullable = true)
+ |-- TITLE: string (nullable = true)
+ |-- TITLE_NAME: string (nullable = true)
+ |-- TITLE_CLEAN: string (nullable = true)
+ |-- SKILLS: string (nullable = true)
+ |-- SKILLS_NAME: string (nullable = true)
+ |-- SPECIALIZED_SKILLS: string (nullable = true)
+ |-- SPECIALIZED_SKILLS_NAME: string (nullable = true)
+ |-- CERTIFICATIONS: string (nullable = true)
+ |-- CERTIFICATIONS_NAME: string (nullable = true)
+ |-- COMMON_SKILLS: string (nullable = true)
+ |-- COMMON_SKILLS_NAME: string (nullable = true)
+ |-- SOFTWARE_SKILLS: string (nullable = true)
+ |-- SOFTWARE_SKILLS_NAME: string (nullable = true)
+ |-- ONET: string (nullable = true)
+ |-- ONET_NAME: string (nullable = true)
+ |-- ONET_2019: string (nullable = true)
+ |-- ONET_2019_NAME: string (nullable = true)
+ |-- CIP6: string (nullable = true)
+ |-- CIP6_NAME: string (nullable = true)
+ |-- CIP4: string (nullable = true)
+ |-- CIP4_NAME: string (nullable = true)
+ |-- CIP2: string (nullable = true)
+ |-- CIP2_NAME: string (nullable = true)
+ |-- SOC_2021_2: string (nullable = true)
+ |-- SOC_2021_2_NAME: string (nullable = true)
+ |-- SOC_2021_3: string (nullable = true)
+ |-- SOC_2021_3_NAME: string (nullable = true)
+ |-- SOC_2021_4: string (nullable = true)
+ |-- SOC_2021_4_NAME: string (nullable = true)
+ |-- SOC_2021_5: string (nullable = true)
+ |-- SOC_2021_5_NAME: string (nullable = true)
+ |-- LOT_CAREER_AREA: integer (nullable = true)
+ |-- LOT_CAREER_AREA_NAME: string (nullable = true)
+ |-- LOT_OCCUPATION: integer (nullable = true)
+ |-- LOT_OCCUPATION_NAME: string (nullable = true)
+ |-- LOT_SPECIALIZED_OCCUPATION: integer (nullable = true)
+ |-- LOT_SPECIALIZED_OCCUPATION_NAME: string (nullable = true)
+ |-- LOT_OCCUPATION_GROUP: integer (nullable = true)
+ |-- LOT_OCCUPATION_GROUP_NAME: string (nullable = true)
+ |-- LOT_V6_SPECIALIZED_OCCUPATION: integer (nullable = true)
+ |-- LOT_V6_SPECIALIZED_OCCUPATION_NAME: string (nullable = true)
+ |-- LOT_V6_OCCUPATION: integer (nullable = true)
+ |-- LOT_V6_OCCUPATION_NAME: string (nullable = true)
+ |-- LOT_V6_OCCUPATION_GROUP: integer (nullable = true)
+ |-- LOT_V6_OCCUPATION_GROUP_NAME: string (nullable = true)
+ |-- LOT_V6_CAREER_AREA: integer (nullable = true)
+ |-- LOT_V6_CAREER_AREA_NAME: string (nullable = true)
+ |-- SOC_2: string (nullable = true)
+ |-- SOC_2_NAME: string (nullable = true)
+ |-- SOC_3: string (nullable = true)
+ |-- SOC_3_NAME: string (nullable = true)
+ |-- SOC_4: string (nullable = true)
+ |-- SOC_4_NAME: string (nullable = true)
+ |-- SOC_5: string (nullable = true)
+ |-- SOC_5_NAME: string (nullable = true)
+ |-- LIGHTCAST_SECTORS: string (nullable = true)
+ |-- LIGHTCAST_SECTORS_NAME: string (nullable = true)
+ |-- NAICS_2022_2: integer (nullable = true)
+ |-- NAICS_2022_2_NAME: string (nullable = true)
+ |-- NAICS_2022_3: integer (nullable = true)
+ |-- NAICS_2022_3_NAME: string (nullable = true)
+ |-- NAICS_2022_4: integer (nullable = true)
+ |-- NAICS_2022_4_NAME: string (nullable = true)
+ |-- NAICS_2022_5: integer (nullable = true)
+ |-- NAICS_2022_5_NAME: string (nullable = true)
+ |-- NAICS_2022_6: integer (nullable = true)
+ |-- NAICS_2022_6_NAME: string (nullable = true)
 
+5000</code></pre>
+</div>
+</div>
+</section>
+<section id="step-2---creating-relational-tables" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Step 2 - Creating Relational Tables</h1>
+<p>We will split the main dataframe into four relational tables based on the dataset:</p>
+<ul>
+<li>Job Postings</li>
+<li>Industries (based on NAICS 2022 and SOC 5)</li>
+<li>Companies</li>
+<li>Location (including MSA - Metropolitan Statistical Area)</li>
+</ul>
+<p>Each table should have a primary key and the necessary foreign keys to maintain relationships. Here’s a table outlining the four relational tables, along with their relevant columns:</p>
+<section id="example" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="example"><span class="header-section-number">2.1</span> Example</h2>
+<p>Let’s get 5 rows of id, title, and company_name from the job postings table.</p>
+<div id="c82d13c6" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>spark.sql(<span class="st">"SELECT ID AS job_id, title_raw FROM jobs LIMIT 5"</span>).show(truncate<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>+----------------------------------------+------------------------------------------------------------+
+|job_id                                  |title_raw                                                   |
++----------------------------------------+------------------------------------------------------------+
+|1f57d95acf4dc67ed2819eb12f049f6a5c11782c|Enterprise Analyst (II-III)                                 |
+|0cb072af26757b6c4ea9464472a50a443af681ac|Oracle Consultant - Reports (3592)                          |
+|85318b12b3331fa490d32ad014379df01855c557|Data Analyst                                                |
+|1b5c3941e54a1889ef4f8ae55b401a550708a310|Sr. Lead Data Mgmt. Analyst - SAS Product Owner             |
+|cb5ca25f02bdf25c13edfede7931508bfd9e858f|Comisiones de $1000 - $3000 por semana... Comiensa Rapido!!!|
++----------------------------------------+------------------------------------------------------------+
+</code></pre>
+</div>
+</div>
+<!-- **********************************************************-->
+</section>
+<section id="locations-table" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="locations-table"><span class="header-section-number">2.2</span> Locations Table</h2>
+<p>Lets extract columns from the main dataframe to create a locations table. The columns are as follows:</p>
+<p>I also sorted the locations table by MSA in ascending order and then added a location_id as primary key.</p>
+<p><code>LOCATION_ID (PK)</code>, <code>LOCATION</code>, <code>CITY_NAME</code>, <code>STATE_NAME</code>, <code>COUNTY_NAME</code>, <code>MSA</code>, <code>MSA_NAME</code>.</p>
+<div id="c85d5a9e" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> col, monotonically_increasing_id</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># using inbuilt pyspark select</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># locations_df = df.select(</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     col("location"),</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     col("city_name"),</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#     col("state_name"),</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#     col("county_name"),</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     col("msa"),</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     col("msa_name")</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># ).distinct().withColumn("location_id", monotonically_increasing_id())</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#alternative using selectExpr</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>locations_df <span class="op">=</span> df.selectExpr(<span class="st">"monotonically_increasing_id() AS LOCATION_ID"</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"location"</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"city_name"</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"state_name"</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"county_name"</span>,</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"msa"</span>,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"msa_name"</span>)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>locations_df.createOrReplaceTempView(<span class="st">"locations"</span>)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>locations_df.show(truncate<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>+-----------+-------------------------------------------------+------------------+-------------+--------------------+-----+-------------------------------------+
+|LOCATION_ID|location                                         |city_name         |state_name   |county_name         |msa  |msa_name                             |
++-----------+-------------------------------------------------+------------------+-------------+--------------------+-----+-------------------------------------+
+|0          |{\n  "lat": 33.20763,\n  "lon": -92.6662674\n}   |El Dorado, AR     |Arkansas     |Union, AR           |20980|El Dorado, AR                        |
+|1          |{\n  "lat": 44.3106241,\n  "lon": -69.7794897\n} |Augusta, ME       |Maine        |Kennebec, ME        |12300|Augusta-Waterville, ME               |
+|2          |{\n  "lat": 32.7766642,\n  "lon": -96.7969879\n} |Dallas, TX        |Texas        |Dallas, TX          |19100|Dallas-Fort Worth-Arlington, TX      |
+|3          |{\n  "lat": 33.4483771,\n  "lon": -112.0740373\n}|Phoenix, AZ       |Arizona      |Maricopa, AZ        |38060|Phoenix-Mesa-Chandler, AZ            |
+|4          |{\n  "lat": 37.6392595,\n  "lon": -120.9970014\n}|Modesto, CA       |California   |Stanislaus, CA      |33700|Modesto, CA                          |
+|5          |{\n  "lat": 0,\n  "lon": 0\n}                    |[Unknown City], AR|Arkansas     |[Unknown county], AR|NULL |NULL                                 |
+|6          |{\n  "lat": 33.4941704,\n  "lon": -111.9260519\n}|Scottsdale, AZ    |Arizona      |Maricopa, AZ        |38060|Phoenix-Mesa-Chandler, AZ            |
+|7          |{\n  "lat": 39.7589478,\n  "lon": -84.1916069\n} |Dayton, OH        |Ohio         |Montgomery, OH      |19430|Dayton-Kettering, OH                 |
+|8          |{\n  "lat": 41.1220409,\n  "lon": -74.5804378\n} |Franklin, NJ      |New Jersey   |Sussex, NJ          |35620|New York-Newark-Jersey City, NY-NJ-PA|
+|9          |{\n  "lat": 40.7501,\n  "lon": -73.997\n}        |New York, NY      |New York     |New York, NY        |35620|New York-Newark-Jersey City, NY-NJ-PA|
+|10         |{\n  "lat": 35.6224561,\n  "lon": -117.6708966\n}|Ridgecrest, CA    |California   |Kern, CA            |12540|Bakersfield, CA                      |
+|11         |{\n  "lat": 21.3069444,\n  "lon": -157.8583333\n}|Honolulu, HI      |Hawaii       |Honolulu, HI        |46520|Urban Honolulu, HI                   |
+|12         |{\n  "lat": 0,\n  "lon": 0\n}                    |[Unknown City], GA|Georgia      |[Unknown county], GA|NULL |NULL                                 |
+|13         |{\n  "lat": 42.331427,\n  "lon": -83.0457538\n}  |Detroit, MI       |Michigan     |Wayne, MI           |19820|Detroit-Warren-Dearborn, MI          |
+|14         |{\n  "lat": 32.2987573,\n  "lon": -90.1848103\n} |Jackson, MS       |Mississippi  |Hinds, MS           |27140|Jackson, MS                          |
+|15         |{\n  "lat": 42.3600825,\n  "lon": -71.0588801\n} |Boston, MA        |Massachusetts|Suffolk, MA         |14460|Boston-Cambridge-Newton, MA-NH       |
+|16         |{\n  "lat": 0,\n  "lon": 0\n}                    |[Unknown City], AZ|Arizona      |[Unknown county], AZ|NULL |NULL                                 |
+|17         |{\n  "lat": 58.3019444,\n  "lon": -134.4197221\n}|Juneau, AK        |Alaska       |Juneau Borough, AK  |27940|Juneau, AK                           |
+|18         |{\n  "lat": 33.5185892,\n  "lon": -86.8103567\n} |Birmingham, AL    |Alabama      |Jefferson, AL       |13820|Birmingham-Hoover, AL                |
+|19         |{\n  "lat": 37.7749295,\n  "lon": -122.4194155\n}|San Francisco, CA |California   |San Francisco, CA   |41860|San Francisco-Oakland-Berkeley, CA   |
++-----------+-------------------------------------------------+------------------+-------------+--------------------+-----+-------------------------------------+
+only showing top 20 rows</code></pre>
+</div>
+</div>
+</section>
+<section id="industries-table" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="industries-table"><span class="header-section-number">2.3</span> Industries Table</h2>
+<p>industries INDUSTRY_ID (Primary Key), NAICS_2022_6, NAICS_2022_6_NAME, SOC_5, SOC_5_NAME, LOT_SPECIALIZED_OCCUPATION_NAME, LOT_OCCUPATION_GROUP</p>
+<div id="ee4192af" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>industries_df <span class="op">=</span> df.selectExpr(<span class="st">"monotonically_increasing_id() AS INDUSTRY_ID"</span>,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"naics_2022_4"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"naics_2022_4_name"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"naics_2022_5"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"naics_2022_5_name"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"naics_2022_6"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"naics_2022_6_name"</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"soc_5 AS SOC_5"</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"soc_5_name AS SOC_5_NAME"</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"lot_specialized_occupation_name"</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"lot_occupation_group"</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>industries_df.createOrReplaceTempView(<span class="st">"industries"</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>industries_df.show(truncate<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>+-----------+------------+------------------------------------------------------------+------------+------------------------------------------------------------------------+------------+------------------------------------------------------------------------+-------+---------------+--------------------------------+--------------------+
+|INDUSTRY_ID|naics_2022_4|naics_2022_4_name                                           |naics_2022_5|naics_2022_5_name                                                       |naics_2022_6|naics_2022_6_name                                                       |SOC_5  |SOC_5_NAME     |lot_specialized_occupation_name |lot_occupation_group|
++-----------+------------+------------------------------------------------------------+------------+------------------------------------------------------------------------+------------+------------------------------------------------------------------------+-------+---------------+--------------------------------+--------------------+
+|0          |4413        |Automotive Parts, Accessories, and Tire Retailers           |44133       |Automotive Parts and Accessories Retailers                              |441330      |Automotive Parts and Accessories Retailers                              |15-2051|Data Scientists|General ERP Analyst / Consultant|2310                |
+|1          |5613        |Employment Services                                         |56132       |Temporary Help Services                                                 |561320      |Temporary Help Services                                                 |15-2051|Data Scientists|Oracle Consultant / Analyst     |2310                |
+|2          |5242        |Agencies, Brokerages, and Other Insurance Related Activities|52429       |Other Insurance Related Activities                                      |524291      |Claims Adjusting                                                        |15-2051|Data Scientists|Data Analyst                    |2311                |
+|3          |5221        |Depository Credit Intermediation                            |52211       |Commercial Banking                                                      |522110      |Commercial Banking                                                      |15-2051|Data Scientists|Data Analyst                    |2311                |
+|4          |9999        |Unclassified Industry                                       |99999       |Unclassified Industry                                                   |999999      |Unclassified Industry                                                   |15-2051|Data Scientists|Oracle Consultant / Analyst     |2310                |
+|5          |5178        |All Other Telecommunications                                |51781       |All Other Telecommunications                                            |517810      |All Other Telecommunications                                            |15-2051|Data Scientists|Data Analyst                    |2311                |
+|6          |3344        |Semiconductor and Other Electronic Component Manufacturing  |33441       |Semiconductor and Other Electronic Component Manufacturing              |334413      |Semiconductor and Related Device Manufacturing                          |15-2051|Data Scientists|Data Analyst                    |2311                |
+|7          |5242        |Agencies, Brokerages, and Other Insurance Related Activities|52429       |Other Insurance Related Activities                                      |524291      |Claims Adjusting                                                        |15-2051|Data Scientists|Data Analyst                    |2311                |
+|8          |9999        |Unclassified Industry                                       |99999       |Unclassified Industry                                                   |999999      |Unclassified Industry                                                   |15-2051|Data Scientists|General ERP Analyst / Consultant|2310                |
+|9          |5415        |Computer Systems Design and Related Services                |54151       |Computer Systems Design and Related Services                            |541511      |Custom Computer Programming Services                                    |15-2051|Data Scientists|Data Analyst                    |2311                |
+|10         |4238        |Machinery, Equipment, and Supplies Merchant Wholesalers     |42383       |Industrial Machinery and Equipment Merchant Wholesalers                 |423830      |Industrial Machinery and Equipment Merchant Wholesalers                 |15-2051|Data Scientists|Data Analyst                    |2311                |
+|11         |5613        |Employment Services                                         |56132       |Temporary Help Services                                                 |561320      |Temporary Help Services                                                 |15-2051|Data Scientists|Data Analyst                    |2311                |
+|12         |5223        |Activities Related to Credit Intermediation                 |52232       |Financial Transactions Processing, Reserve, and Clearinghouse Activities|522320      |Financial Transactions Processing, Reserve, and Clearinghouse Activities|15-2051|Data Scientists|Data Analyst                    |2311                |
+|13         |5416        |Management, Scientific, and Technical Consulting Services   |54161       |Management Consulting Services                                          |541611      |Administrative Management and General Management Consulting Services    |15-2051|Data Scientists|General ERP Analyst / Consultant|2310                |
+|14         |5239        |Other Financial Investment Activities                       |52394       |Portfolio Management and Investment Advice                              |523940      |Portfolio Management and Investment Advice                              |15-2051|Data Scientists|Enterprise Architect            |2315                |
+|15         |6113        |Colleges, Universities, and Professional Schools            |61131       |Colleges, Universities, and Professional Schools                        |611310      |Colleges, Universities, and Professional Schools                        |15-2051|Data Scientists|Data Analyst                    |2311                |
+|16         |5415        |Computer Systems Design and Related Services                |54151       |Computer Systems Design and Related Services                            |541512      |Computer Systems Design Services                                        |15-2051|Data Scientists|General ERP Analyst / Consultant|2310                |
+|17         |5613        |Employment Services                                         |56132       |Temporary Help Services                                                 |561320      |Temporary Help Services                                                 |15-2051|Data Scientists|Oracle Consultant / Analyst     |2310                |
+|18         |6214        |Outpatient Care Centers                                     |62149       |Other Outpatient Care Centers                                           |621493      |Freestanding Ambulatory Surgical and Emergency Centers                  |15-2051|Data Scientists|Enterprise Architect            |2315                |
+|19         |9999        |Unclassified Industry                                       |99999       |Unclassified Industry                                                   |999999      |Unclassified Industry                                                   |15-2051|Data Scientists|Data Analyst                    |2311                |
++-----------+------------+------------------------------------------------------------+------------+------------------------------------------------------------------------+------------+------------------------------------------------------------------------+-------+---------------+--------------------------------+--------------------+
+only showing top 20 rows</code></pre>
+</div>
+</div>
+</section>
+<section id="companies-table" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="companies-table"><span class="header-section-number">2.4</span> Companies Table</h2>
+<div id="777cf4f8" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Create Companies Table (Primary Key: company_id)</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>companies_df <span class="op">=</span> df.select(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    col(<span class="st">"company"</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    col(<span class="st">"company_name"</span>),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    col(<span class="st">"company_raw"</span>),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    col(<span class="st">"company_is_staffing"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>).distinct().withColumn(<span class="st">"company_id"</span>, monotonically_increasing_id())</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># companies_df.show(5)</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>companies <span class="op">=</span> companies_df.toPandas()</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>companies.drop(columns<span class="op">=</span>[<span class="st">"company"</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>companies.rename(columns<span class="op">=</span>{<span class="st">"company_is_staffing"</span>: <span class="st">"is_staffing"</span>},</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>companies.to_csv(<span class="st">"./output/companies.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>companies.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="80">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">company_name</th>
+<th data-quarto-table-cell-role="th">company_raw</th>
+<th data-quarto-table-cell-role="th">is_staffing</th>
+<th data-quarto-table-cell-role="th">company_id</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Murphy USA</td>
+<td>Murphy USA</td>
+<td>False</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Smx Corporation Limited</td>
+<td>SMX</td>
+<td>True</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Sedgwick</td>
+<td>Sedgwick</td>
+<td>False</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Wells Fargo</td>
+<td>Wells Fargo</td>
+<td>False</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Unclassified</td>
+<td>LH/GM</td>
+<td>False</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="job-postings-table" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="job-postings-table"><span class="header-section-number">2.5</span> Job postings Table</h2>
+<div id="be327e58" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: Create Job Postings Table (Adding Foreign Keys)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>job_postings_df <span class="op">=</span> df.select(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    col(<span class="st">"id"</span>).alias(<span class="st">"job_id"</span>),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    col(<span class="st">"title_clean"</span>),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    col(<span class="st">"body"</span>),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    col(<span class="st">"company"</span>),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    col(<span class="st">"employment_type_name"</span>),</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    col(<span class="st">"remote_type_name"</span>),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    col(<span class="st">"min_years_experience"</span>),</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    col(<span class="st">"max_years_experience"</span>),</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    col(<span class="st">"salary"</span>),</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    col(<span class="st">"salary_from"</span>),</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    col(<span class="st">"salary_to"</span>),</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    col(<span class="st">"location"</span>),</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    col(<span class="st">"naics_2022_6"</span>),</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    col(<span class="st">"posted"</span>),</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    col(<span class="st">"expired"</span>),</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    col(<span class="st">"duration"</span>)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>job_postings_df.show(<span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>+--------------------+--------------------+--------------------+--------+--------------------+----------------+--------------------+--------------------+------+-----------+---------+--------------------+------------+--------+---------+--------+
+|              job_id|         title_clean|                body| company|employment_type_name|remote_type_name|min_years_experience|max_years_experience|salary|salary_from|salary_to|            location|naics_2022_6|  posted|  expired|duration|
++--------------------+--------------------+--------------------+--------+--------------------+----------------+--------------------+--------------------+------+-----------+---------+--------------------+------------+--------+---------+--------+
+|1f57d95acf4dc67ed...|enterprise analys...|31-May-2024\n\nEn...|  894731|Full-time (&gt; 32 h...|          [None]|                   2|                   2|  NULL|       NULL|     NULL|{\n  "lat": 33.20...|      441330|6/2/2024| 6/8/2024|       6|
+|0cb072af26757b6c4...|oracle consultant...|Oracle Consultant...|  133098|Full-time (&gt; 32 h...|          Remote|                   3|                   3|  NULL|       NULL|     NULL|{\n  "lat": 44.31...|      561320|6/2/2024| 8/1/2024|    NULL|
+|85318b12b3331fa49...|        data analyst|Taking care of pe...|39063746|Full-time (&gt; 32 h...|          [None]|                   5|                NULL|  NULL|       NULL|     NULL|{\n  "lat": 32.77...|      524291|6/2/2024| 7/7/2024|      35|
+|1b5c3941e54a1889e...|sr lead data mgmt...|About this role:\...|37615159|Full-time (&gt; 32 h...|          [None]|                   3|                NULL|  NULL|       NULL|     NULL|{\n  "lat": 33.44...|      522110|6/2/2024|7/20/2024|      48|
+|cb5ca25f02bdf25c1...|comisiones de por...|Comisiones de $10...|       0|Part-time / full-...|          [None]|                NULL|                NULL| 92500|      35000|   150000|{\n  "lat": 37.63...|      999999|6/2/2024|6/17/2024|      15|
++--------------------+--------------------+--------------------+--------+--------------------+----------------+--------------------+--------------------+------+-----------+---------+--------------------+------------+--------+---------+--------+
+only showing top 5 rows</code></pre>
+</div>
+</div>
+<p>Adding Foreign keys to job postings table</p>
+<div id="3e4cb46e" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Join with Companies Table to get company_id</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>job_postings_df <span class="op">=</span> job_postings_df.join(companies_df.select(<span class="st">"company"</span>, <span class="st">"company_id"</span>), on<span class="op">=</span><span class="st">"company"</span>, how<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Join with Locations Table to get location_id</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>job_postings_df <span class="op">=</span> job_postings_df.join(locations_df.select(<span class="st">"location"</span>, <span class="st">"location_id"</span>), job_postings_df.location <span class="op">==</span> locations_df[<span class="st">"location"</span>],</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>how<span class="op">=</span><span class="st">"left"</span>).drop(<span class="st">"location"</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Join with Industries Table to get industry_id</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>job_postings_df <span class="op">=</span> job_postings_df.join(industries_df.select(<span class="st">"naics_2022_6"</span>, <span class="st">"industry_id"</span>),</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a> job_postings_df.naics_2022_6 <span class="op">==</span> industries_df.naics_2022_6,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a> how<span class="op">=</span><span class="st">"left"</span>).drop(<span class="st">"naics_2022_6"</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop redundant columns</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>job_postings_df <span class="op">=</span> job_postings_df.drop(<span class="st">"company"</span>, <span class="st">"lat-long"</span>)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>job_postings_df.createOrReplaceTempView(<span class="st">"job_postings"</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Show final job_postings_df structure</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>job_postings_df.show(<span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>25/09/21 04:24:10 WARN Column: Constructing trivially true equals predicate, 'location == location'. Perhaps you need to use aliases.
+25/09/21 04:24:10 WARN Column: Constructing trivially true equals predicate, 'naics_2022_6 == naics_2022_6'. Perhaps you need to use aliases.
+[Stage 230:&gt;  (0 + 1) / 1][Stage 231:&gt;  (0 + 1) / 1][Stage 232:&gt;  (0 + 0) / 1][Stage 232:&gt;                                                        (0 + 1) / 1]                                                                                </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>+--------------------+--------------------+--------------------+--------------------+----------------+--------------------+--------------------+------+-----------+---------+--------+--------+--------+----------+-----------+-----------+
+|              job_id|         title_clean|                body|employment_type_name|remote_type_name|min_years_experience|max_years_experience|salary|salary_from|salary_to|  posted| expired|duration|company_id|location_id|industry_id|
++--------------------+--------------------+--------------------+--------------------+----------------+--------------------+--------------------+------+-----------+---------+--------+--------+--------+----------+-----------+-----------+
+|1f57d95acf4dc67ed...|enterprise analys...|31-May-2024\n\nEn...|Full-time (&gt; 32 h...|          [None]|                   2|                   2|  NULL|       NULL|     NULL|6/2/2024|6/8/2024|       6|         0|       1399|       4561|
+|1f57d95acf4dc67ed...|enterprise analys...|31-May-2024\n\nEn...|Full-time (&gt; 32 h...|          [None]|                   2|                   2|  NULL|       NULL|     NULL|6/2/2024|6/8/2024|       6|         0|       1399|       2770|
+|1f57d95acf4dc67ed...|enterprise analys...|31-May-2024\n\nEn...|Full-time (&gt; 32 h...|          [None]|                   2|                   2|  NULL|       NULL|     NULL|6/2/2024|6/8/2024|       6|         0|       1399|       1399|
+|1f57d95acf4dc67ed...|enterprise analys...|31-May-2024\n\nEn...|Full-time (&gt; 32 h...|          [None]|                   2|                   2|  NULL|       NULL|     NULL|6/2/2024|6/8/2024|       6|         0|       1399|          0|
+|1f57d95acf4dc67ed...|enterprise analys...|31-May-2024\n\nEn...|Full-time (&gt; 32 h...|          [None]|                   2|                   2|  NULL|       NULL|     NULL|6/2/2024|6/8/2024|       6|         0|          0|       4561|
++--------------------+--------------------+--------------------+--------------------+----------------+--------------------+--------------------+------+-----------+---------+--------+--------+--------+----------+-----------+-----------+
+only showing top 5 rows</code></pre>
+</div>
+</div>
+<!-- **********************************************************-->
+</section>
+</section>
+<section id="query-1-industry-specific-salary-trends-grouped-by-job-title" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Query 1: Industry-Specific Salary Trends Grouped by Job Title</h1>
+<p>Identify <strong>median salary trends</strong> for job postings in the <strong>Technology industry (<code>NAICS_2022_5 = '51821'</code>)</strong>, grouped by <strong>specialized occupation</strong>.</p>
+<ul>
+<li><strong>Filter the dataset</strong>
+<ul>
+<li>Select job postings where <strong><code>naics_2022_5 = '51821'</code></strong> (Technology industry).</li>
+<li>Ensure salary values are <strong>not NULL and greater than 0</strong>.</li>
+</ul></li>
+<li><strong>Join the relevant tables</strong>
+<ul>
+<li>Use <strong><code>job_postings</code></strong> as the base table.</li>
+<li>Join with <strong><code>industries</code></strong> using <strong><code>industry_id</code></strong>.</li>
+</ul></li>
+<li><strong>Aggregate data</strong>
+<ul>
+<li>Group results by <strong>industry name (<code>naics_2022_5_name</code>)</strong> and <strong>specialized occupation (<code>specialized_occupation</code>)</strong>.</li>
+<li>Compute the <strong>median salary</strong> using <strong><code>PERCENTILE_APPROX()</code></strong> for specialized occupation.</li>
+</ul></li>
+<li><strong>Order the results</strong>
+<ul>
+<li>Sort by <strong>median salary</strong> in descending order.</li>
+</ul></li>
+<li><strong>Visualize results</strong> using <strong>Plotly</strong>
+<ul>
+<li>Create a <strong>grouped bar chart</strong> where:
+<ul>
+<li><strong>X-axis</strong> = <code>lot_specialized_occupation_name</code></li>
+<li><strong>Y-axis</strong> = <code>median_salary</code></li>
+<li><strong>Color</strong> = <code>industry_name</code></li>
+</ul></li>
+</ul></li>
+<li>Ensure different specialized occupations are distinguishable across the industry.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Query compute median salary by specialized occupation in Tech in progress
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div id="e0e4a54e" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> F</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for Tech industry</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>tech <span class="op">=</span> (</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    df.where(</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        (F.col(<span class="st">"NAICS_2022_5"</span>) <span class="op">==</span> <span class="st">"51821"</span>) <span class="op">&amp;</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        F.col(<span class="st">"SALARY"</span>).isNotNull() <span class="op">&amp;</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        (F.col(<span class="st">"SALARY"</span>) <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    .withColumn(<span class="st">"salary_d"</span>, F.col(<span class="st">"SALARY"</span>).cast(<span class="st">"double"</span>))</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    .groupBy(</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        F.col(<span class="st">"NAICS_2022_5_NAME"</span>),</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        F.col(<span class="st">"LOT_SPECIALIZED_OCCUPATION_NAME"</span>)   <span class="co"># ← aquí nombre real</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    .agg(F.expr(<span class="st">"percentile_approx(salary_d, 0.5)"</span>).alias(<span class="st">"median_salary"</span>))</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    .orderBy(F.desc(<span class="st">"median_salary"</span>))</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>tech.show(truncate<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>+--------------------------------------------------------------------------------------+--------------------------------+-------------+
+|NAICS_2022_5_NAME                                                                     |LOT_SPECIALIZED_OCCUPATION_NAME |median_salary|
++--------------------------------------------------------------------------------------+--------------------------------+-------------+
+|Computing Infrastructure Providers, Data Processing, Web Hosting, and Related Services|Enterprise Architect            |190000.0     |
+|Computing Infrastructure Providers, Data Processing, Web Hosting, and Related Services|SAP Analyst / Admin             |145600.0     |
+|Computing Infrastructure Providers, Data Processing, Web Hosting, and Related Services|Oracle Consultant / Analyst     |143000.0     |
+|Computing Infrastructure Providers, Data Processing, Web Hosting, and Related Services|General ERP Analyst / Consultant|118140.0     |
+|Computing Infrastructure Providers, Data Processing, Web Hosting, and Related Services|Data Analyst                    |80000.0      |
+|Computing Infrastructure Providers, Data Processing, Web Hosting, and Related Services|Business Intelligence Analyst   |74298.0      |
+|Computing Infrastructure Providers, Data Processing, Web Hosting, and Related Services|Data Quality Analyst            |40000.0      |
++--------------------------------------------------------------------------------------+--------------------------------+-------------+
+</code></pre>
+</div>
+</div>
+<!-- **********************************************************-->
+<section id="plot" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> PLOT</h1>
+<div id="c1860d6f" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.io <span class="im">as</span> pio</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>pio.renderers.default <span class="op">=</span> <span class="st">"plotly_mimetype"</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>pdf <span class="op">=</span> tech.toPandas()</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>pdf <span class="op">=</span> pdf.sort_values(<span class="st">"median_salary"</span>, ascending<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    pdf,</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"LOT_SPECIALIZED_OCCUPATION_NAME"</span>,  </span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"median_salary"</span>,                   </span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Median Salary by Specialized Occupation"</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>fig</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<pre><code>Unable to display output for mime type(s): application/vnd.plotly.v1+json</code></pre>
+</div>
+</div>
+<!-- **********************************************************-->
+<div id="4fbd6908" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> functions <span class="im">as</span> F</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar y agrupar</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>tech2 <span class="op">=</span> (df</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    .where( (F.col(<span class="st">"NAICS_2022_6"</span>) <span class="op">==</span> F.lit(<span class="st">"518210"</span>)) <span class="op">&amp;</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>            F.col(<span class="st">"SALARY"</span>).isNotNull() <span class="op">&amp;</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>            (F.col(<span class="st">"SALARY"</span>) <span class="op">&gt;</span> <span class="dv">0</span>) )</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    .groupBy(</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>        F.coalesce(F.col(<span class="st">"NAICS_2022_6_NAME"</span>), F.lit(<span class="st">"NAICS 518210"</span>)).alias(<span class="st">"industry_name"</span>),</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>        F.col(<span class="st">"LOT_SPECIALIZED_OCCUPATION_NAME"</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    .agg(F.expr(<span class="st">"percentile_approx(SALARY, 0.5)"</span>).alias(<span class="st">"median_salary"</span>))</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    .orderBy(F.desc(<span class="st">"median_salary"</span>))</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<!-- **********************************************************-->
+<div id="fca6f4d7" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#from pyspark.sql.functions import col</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>df_pandas <span class="op">=</span> df.select(<span class="st">"SALARY"</span>).toPandas()</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>plt.hist(df_pandas[<span class="st">'SALARY'</span>].dropna(), bins<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribución de salarios"</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Salario"</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Frecuencia"</span>)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="juliovargas_files/figure-html/cell-12-output-1.png" width="593" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</section>
 
 </main>
 <!-- /main column -->
