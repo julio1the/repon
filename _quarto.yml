@@ -1,0 +1,14 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Sitio Julio Vargas"
+  navbar:
+    left:
+      - href: juliovargas.qmd
+        text: Inicio
+
+format:
+  html:
+    theme: cosmo
