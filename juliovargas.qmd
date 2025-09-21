@@ -283,27 +283,34 @@ tech.show(truncate=False)
 # PLOT
 
 ```{python}
-import pandas as pd
 import plotly.express as px
 import plotly.io as pio
 
-#pio.renderers.default = "plotly_mimetype"
-pdf = tech.toPandas()
+pio.renderers.default = "iframe"
 
-pdf = pdf.sort_values("median_salary", ascending=True)
+pdf = tech.toPandas().sort_values("median_salary", ascending=True)
 
 fig = px.bar(
     pdf,
-    x="LOT_SPECIALIZED_OCCUPATION_NAME",  
-    y="median_salary",                   
-    title="Median Salary by Specialized Occupation"
+    x="median_salary",
+    y="LOT_SPECIALIZED_OCCUPATION_NAME",
+    color="LOT_SPECIALIZED_OCCUPATION_NAME",  # colores por ocupación
+    orientation="h",
+    title="Median Salary Trends in the Technology Sector by Specialized Occupation",
+    labels={
+        "median_salary": "Median Salary ($)",
+        "LOT_SPECIALIZED_OCCUPATION_NAME": "Specialized Occupation"
+    },
+    height=800,
+    width=1000
 )
 
-fig
-
+fig.update_layout(showlegend=False)  # oculta la leyenda
+fig.show()
 
 
 ```
+
 
 
 
